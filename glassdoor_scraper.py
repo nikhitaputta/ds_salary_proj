@@ -3,7 +3,8 @@
 """
 Created on Tue Jun 23 17:02:35 2020
 
-@author: nikhitaputta
+author: kinarapfaik
+url: https://github.com/arapfaik/scraping-glassdoor-selenium/blob/master/glassdoor%20scraping.ipynb
 """
 
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
@@ -20,10 +21,15 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
     
     #Uncomment the line below if you'd like to scrape without a new Chrome window every time.
     #options.add_argument('headless')
+    options.add_argument("--incognito")
     
     #Change the path to where chromedriver is in your home folder.
     driver = webdriver.Chrome(executable_path=path, options=options)
     driver.set_window_size(1120, 1000)
+    
+    # To delete all cookies
+    driver.delete_all_cookies()
+        
     url = "https://www.glassdoor.co.in/Job/jobs.htm?sc.generalKeyword="+keyword+"&locId=3&locT=N"
 
     #url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword="' + keyword + '"&locT=C&locId=1147401&locKeyword=San%20Francisco,%20CA&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
@@ -58,7 +64,8 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             if len(jobs) >= num_jobs:
                 break
 
-            job_button.click()  #You might 
+           # job_button.click()  #You might 
+            driver.execute_script("arguments[0].click();", job_button)
             time.sleep(1)
             collected_successfully = False
             
