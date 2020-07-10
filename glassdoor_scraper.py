@@ -192,5 +192,8 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
         except NoSuchElementException:
             print("Scraping terminated before reaching target number of jobs. Needed {}, got {}.".format(num_jobs, len(jobs)))
             break
+   # Closing the browser, driver and freeing the memory     
+    driver.quit()
+    print('Log: driver is shutdown')
 
     return pd.DataFrame(jobs)  #This line converts the dictionary object into a pandas DataFrame.
