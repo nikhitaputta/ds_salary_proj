@@ -1,4 +1,4 @@
-# ds_salary_proj
+# Salary estimator for Data Science jobs in Canada
 
 ## Resources
 
